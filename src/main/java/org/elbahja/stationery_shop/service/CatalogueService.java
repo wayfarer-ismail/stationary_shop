@@ -17,4 +17,8 @@ public class CatalogueService {
     public List<CatalogueItem> getCatalogue() {
         return catalogueRepository.findAll();
     }
+
+    public void save(CatalogueItem item) {
+        catalogueRepository.save(item);
+    }
 }
