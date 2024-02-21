@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to the Stationery Shop</title>
+    <!-- Include Bootstrap CSS from a CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container">
+    <h1>Welcome to the Stationery Shop</h1>
+    <div class="services">
+        <h2>Our Services</h2>
+        <p>We offer a wide range of stationery products. From pens and pencils to notebooks and art supplies, we have everything you need for your office or school needs.</p>
+    </div>
+</div>
+</body>
+</html>

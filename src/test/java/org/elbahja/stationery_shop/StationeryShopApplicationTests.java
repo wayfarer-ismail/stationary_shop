@@ -1,10 +1,10 @@
-package org.elbahja.stationary_shop;
+package org.elbahja.stationery_shop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StationaryShopApplicationTests {
+class StationeryShopApplicationTests {
 
     @Test
     void contextLoads() {
