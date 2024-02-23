@@ -5,8 +5,9 @@
     <title>Welcome to the Stationery Shop</title>
     <!-- Include Bootstrap CSS from a CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <!-- Link to your custom CSS file -->
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -17,5 +18,6 @@
         <p>We offer a wide range of stationery products. From pens and pencils to notebooks and art supplies, we have everything you need for your office or school needs.</p>
     </div>
 </div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>
