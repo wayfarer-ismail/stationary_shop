@@ -21,4 +21,8 @@ public class CatalogueService {
     public void save(CatalogueItem item) {
         catalogueRepository.save(item);
     }
+
+    public CatalogueItem getItem(Long id) {
+        return catalogueRepository.findById(id).orElse(null);
+    }
 }
