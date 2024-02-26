@@ -17,4 +17,12 @@ public class CatalogueService {
     public List<CatalogueItem> getCatalogue() {
         return catalogueRepository.findAll();
     }
+
+    public void save(CatalogueItem item) {
+        catalogueRepository.save(item);
+    }
+
+    public CatalogueItem getItem(Long id) {
+        return catalogueRepository.findById(id).orElse(null);
+    }
 }

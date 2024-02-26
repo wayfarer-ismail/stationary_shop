@@ -4,6 +4,7 @@ import org.elbahja.stationery_shop.service.CatalogueService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -19,5 +20,11 @@ public class CatalogueController {
     public String getCatalogue(Model model) {
         model.addAttribute("catalogue", catalogueService.getCatalogue());
         return "catalogue";
+    }
+
+    @GetMapping("/{id}")
+    public String getItem(Model model, @PathVariable Long id) {
+        model.addAttribute("item", catalogueService.getItem(id));
+        return "item";
     }
 }
