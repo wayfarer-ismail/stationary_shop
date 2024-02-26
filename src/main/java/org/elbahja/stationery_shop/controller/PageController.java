@@ -10,4 +10,9 @@ public class PageController {
     public String services() {
         return "services";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
