@@ -13,15 +13,13 @@ public class UserDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
     private String username;
     private String password;
 
     public UserDAO() {
     }
 
-    public UserDAO(String name, String username, String password) {
-        this.name = name;
+    public UserDAO(String username, String password) {
         this.username = username;
         this.password = password;
     }

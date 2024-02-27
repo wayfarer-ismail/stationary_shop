@@ -1,7 +1,9 @@
 package org.elbahja.stationery_shop;
 
 import org.elbahja.stationery_shop.model.CatalogueItem;
+import org.elbahja.stationery_shop.model.UserRequest;
 import org.elbahja.stationery_shop.service.CatalogueService;
+import org.elbahja.stationery_shop.service.UserDetailsServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,14 +11,22 @@ import org.springframework.stereotype.Component;
 public class DataLoader implements CommandLineRunner {
 
     private final CatalogueService catalogueService;
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
 
-    public DataLoader(CatalogueService catalogueService) {
+    public DataLoader(CatalogueService catalogueService, UserDetailsServiceImpl userDetailsServiceImpl) {
         this.catalogueService = catalogueService;
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
     }
 
     @Override
     public void run(String... args) throws Exception {
         loadCatalogueItems();
+        loadDefaultAdmin();
+    }
+
+    private void loadDefaultAdmin() {
+        UserRequest admin = new UserRequest("admin", "admin");
+        userDetailsServiceImpl.registerUser(admin);
     }
 
     private void loadCatalogueItems() {

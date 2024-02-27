@@ -46,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //            throw new BadRequestException("Empty fields!");
 //        }
 
-        UserDAO userAdapter = new UserDAO(userReq.name(), userReq.username(),
+        UserDAO userAdapter = new UserDAO(userReq.username(),
                 passwordEncoder.passwordEncoder().encode(userReq.password()));
 
 //        if (userRepository.existsByUsernameIgnoreCase(user.getUsername())) {
