@@ -6,11 +6,11 @@ services:
     container_name: database
     restart: always
     environment:
-      POSTGRES_DB: students
+      POSTGRES_DB: shop
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:
-      - students_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
     ports:
       - "5432:5432"
@@ -25,5 +25,5 @@ services:
 
 
 volumes:
-  students_data:
+  postgres_data:
 
