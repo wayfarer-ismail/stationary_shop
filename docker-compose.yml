@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    build: db
+    container_name: database
+    restart: always
+    environment:
+      POSTGRES_DB: students
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - students_data:/var/lib/postgresql/data
+
+    ports:
+      - "5432:5432"
+    tty: true
+
+  ui:
+    build: web
+    container_name: webui
+    restart: always
+    ports:
+      - "8080:8080"
+
+
+volumes:
+  students_data:
+

@@ -32,6 +32,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new UserAdapter(user);
     }
 
+    public boolean userExists(String username) {
+        return userRepository.existsByUsernameIgnoreCase(username);
+    }
+
     /**
      * Registers a user.
      * Validates the fields of the user request, converts it to a UserDAO object,

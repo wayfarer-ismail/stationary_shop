@@ -26,7 +26,9 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadDefaultAdmin() {
         UserRequest admin = new UserRequest("admin", "admin");
-        userDetailsServiceImpl.registerUser(admin);
+        if(!userDetailsServiceImpl.userExists (admin.username())) {
+            userDetailsServiceImpl.registerUser(admin);
+        }
     }
 
     private void loadCatalogueItems() {
