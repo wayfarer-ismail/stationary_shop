@@ -1,13 +1,10 @@
 package org.elbahja.stationery_shop.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import java.util.Base64;
 @Entity
 @NoArgsConstructor
 @Getter
@@ -19,12 +16,17 @@ public class CatalogueItem {
     private String name;
     private String description;
     private double price;
-    private String imageUrl;
+    @Lob
+    private byte[] image;
 
-    public CatalogueItem(String name, String description, double price, String imageUrl) {
+    public CatalogueItem(String name, String description, double price, byte[] image) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.image = image;
+    }
+
+    public String getImageBase64() {
+        return Base64.getEncoder().encodeToString(image);
     }
 }

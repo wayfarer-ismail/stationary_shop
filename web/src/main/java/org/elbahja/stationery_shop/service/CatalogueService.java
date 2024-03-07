@@ -5,6 +5,7 @@ import org.elbahja.stationery_shop.repository.CatalogueRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CatalogueService {
@@ -24,5 +25,9 @@ public class CatalogueService {
 
     public CatalogueItem getItem(Long id) {
         return catalogueRepository.findById(id).orElse(null);
+    }
+
+    public Optional<CatalogueItem> findById(Long id) {
+        return catalogueRepository.findById(id);
     }
 }
