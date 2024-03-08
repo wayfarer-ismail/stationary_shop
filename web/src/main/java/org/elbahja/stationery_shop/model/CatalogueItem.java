@@ -14,6 +14,7 @@ public class CatalogueItem {
     @Id
     private Long id;
     private String name;
+    @Column(length = 1000)
     private String description;
     private double price;
     @Lob
