@@ -15,8 +15,8 @@
         <div class="d-flex flex-wrap">
             <div th:each="item : ${catalogue}" class="p-2 clickable" th:onclick="'window.location.href=\'/catalogue/' + ${item.id} + '\''" style="cursor: pointer;">
                 <img th:src="'data:image/png;base64,'+${item.getImageBase64()}" alt="Image of the product" class="product-image">
-                <h3 th:text="${item.name}"></h3>
-                <p th:text="${item.description}"></p>
+                <h3 class="product-name" th:text="${item.name}"></h3>
+                <p class="product-description" th:text="${#strings.abbreviate(item.description, 100)}"></p>
                 <p th:text="${'€' + item.price}"></p>
             </div>
         </div>

@@ -16,6 +16,18 @@ body {
     height: auto;
 }
 
+.product-name {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.product-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
 .display-image {
     max-width: 100%;
     max-height: 100%;
