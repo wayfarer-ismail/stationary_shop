@@ -11,6 +11,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Optional;
 
 @Configuration
 public class SecurityConfig {
@@ -58,5 +63,15 @@ public class SecurityConfig {
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder);
+    }
+
+    public Optional<UserDetails> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(((UserDetails) authentication.getPrincipal()));
     }
 }

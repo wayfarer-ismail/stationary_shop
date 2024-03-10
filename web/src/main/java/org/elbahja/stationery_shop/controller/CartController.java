@@ -1,8 +1,12 @@
 package org.elbahja.stationery_shop.controller;
 
+import org.elbahja.stationery_shop.model.Cart;
 import org.elbahja.stationery_shop.service.CartService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
@@ -14,14 +18,16 @@ public class CartController {
     }
 
     @GetMapping
-    public String cart() {
+    public String cart(Model model) {
+        List<Cart> cart = cartService.getCartForCurrentUser();
+        model.addAttribute("cartItems", cart);
         return "cart";
     }
 
     @PostMapping("/add")
     public String addToCart(@RequestParam("itemId") Long itemId) {
         // get user id from session
-        cartService.addToCart(0L, itemId, 1);
+        cartService.addToCart(itemId, 1);
         return "redirect:/cart";
     }
 }

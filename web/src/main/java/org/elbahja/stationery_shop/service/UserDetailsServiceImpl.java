@@ -32,6 +32,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return new UserAdapter(user);
     }
 
+    public Optional<UserDAO> findByUsername(String username) {
+        return userRepository.findByUsernameIgnoreCase(username);
+    }
+
     public boolean userExists(String username) {
         return userRepository.existsByUsernameIgnoreCase(username);
     }
