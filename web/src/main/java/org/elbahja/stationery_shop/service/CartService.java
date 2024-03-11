@@ -1,11 +1,12 @@
 package org.elbahja.stationery_shop.service;
 
 import org.elbahja.stationery_shop.config.SecurityConfig;
-import org.elbahja.stationery_shop.model.Cart;
+import org.elbahja.stationery_shop.model.CartItem;
 import org.elbahja.stationery_shop.model.UserDAO;
 import org.elbahja.stationery_shop.repository.CartRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,10 +25,11 @@ public class CartService {
 
     public void addToCart(Long itemId, int quantity) {
         Optional<UserDAO> user = findCurrentUser();
-        user.ifPresent(userDAO -> cartRepository.save(new Cart(userDAO.getId(), itemId, quantity)));
+        user.ifPresent(userDAO -> cartRepository.save(new CartItem(userDAO.getId(), itemId, quantity)));
     }
 
-    public List<Cart> getCart(Long userId) {
+    @Transactional
+    public List<CartItem> getCart(Long userId) {
         return cartRepository.findAllByUserId(userId);
     }
 
@@ -35,7 +37,8 @@ public class CartService {
         cartRepository.deleteByUserIdAndItemId(userId, itemId);
     }
 
-    public List<Cart> getCartForCurrentUser() {
+    @Transactional
+    public List<CartItem> getCartForCurrentUser() {
         Optional<UserDAO> user = findCurrentUser();
         if (user.isPresent()) {
             return getCart(user.get().getId());

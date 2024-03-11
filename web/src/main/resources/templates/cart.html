@@ -16,11 +16,15 @@
             <tr>
                 <th>Item</th>
                 <th>Price</th>
+                <th>Quantity</th>
                 <th>Actions</th>
             </tr>
             <tr th:each="item : ${cartItems}">
-                <td th:text="${item.getId()}"></td>
-                <td th:text="${item.getUserId()}"></td>
+                <td th:text="${item.item.getName()}"></td>
+                <td th:text="${item.item.getPrice()}"></td>
+<!--                <td><img th:src="'data:image/png;base64,'+${item.item.getImageBase64()}" alt="Image of the product" class="ui-icon-image"></td>-->
+                <td th:text="${item.getQuantity()}"></td>
+
                 <td>
                     <a th:href="@{/cart/remove/{id}(id=${item.id})}">Remove</a>
                 </td>

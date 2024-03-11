@@ -1,6 +1,6 @@
 package org.elbahja.stationery_shop.controller;
 
-import org.elbahja.stationery_shop.model.Cart;
+import org.elbahja.stationery_shop.model.CartItem;
 import org.elbahja.stationery_shop.service.CartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ public class CartController {
 
     @GetMapping
     public String cart(Model model) {
-        List<Cart> cart = cartService.getCartForCurrentUser();
+        List<CartItem> cart = cartService.getCartForCurrentUser();
         model.addAttribute("cartItems", cart);
         return "cart";
     }

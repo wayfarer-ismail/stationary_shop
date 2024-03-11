@@ -1,28 +1,28 @@
 package org.elbahja.stationery_shop.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
 @Getter
-public class Cart {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long userId;
     private Long itemId;
     private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "itemId", referencedColumnName = "id", insertable = false, updatable = false)
+    private CatalogueItem item;
 
-    public Cart(Long userId, Long itemId, int quantity) {
+    public CartItem(Long userId, Long itemId, int quantity) {
         this.userId = userId;
         this.itemId = itemId;
         this.quantity = quantity;
     }
 
-    public Cart() {
+    public CartItem() {
     }
 
 }
