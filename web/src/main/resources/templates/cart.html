@@ -26,12 +26,15 @@
                 <td th:text="${item.getQuantity()}"></td>
 
                 <td>
-                    <a th:href="@{/cart/remove/{id}(id=${item.id})}">Remove</a>
+                    <button class="increase-quantity" th:data-id="${item.id}">+</button>
+                    <button class="decrease-quantity" th:data-id="${item.id}">-</button>
+                    <button class="remove-item" th:data-id="${item.id}">Remove</button>
                 </td>
             </tr>
         </table>
     </div>
 </div>
 <footer th:replace="~{fragments/footer :: footer}"></footer>
+<script src="/js/cart.js"></script>
 </body>
 </html>

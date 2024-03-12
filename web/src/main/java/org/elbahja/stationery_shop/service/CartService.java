@@ -4,6 +4,7 @@ import org.elbahja.stationery_shop.config.SecurityConfig;
 import org.elbahja.stationery_shop.model.CartItem;
 import org.elbahja.stationery_shop.model.UserDAO;
 import org.elbahja.stationery_shop.repository.CartRepository;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,8 +34,10 @@ public class CartService {
         return cartRepository.findAllByUserId(userId);
     }
 
-    public void removeFromCart(Long userId, Long itemId) {
-        cartRepository.deleteByUserIdAndItemId(userId, itemId);
+    @Transactional
+    public void removeFromCart(Long itemId) {
+        Optional<UserDAO> user = findCurrentUser();
+        user.ifPresent(userDAO -> cartRepository.deleteByUserIdAndItemId(userDAO.getId(), itemId));
     }
 
     @Transactional
@@ -52,5 +55,23 @@ public class CartService {
             return userDetailsService.findByUsername(userDetails.get().getUsername());
         }
         return Optional.empty();
+    }
+
+    @Transactional
+    public int increaseQuantity(Long id) {
+        CartItem item = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("CartItem not found"));
+        item.setQuantity(item.getQuantity() + 1);
+        cartRepository.save(item);
+        return item.getQuantity();
+    }
+
+    @Transactional
+    public int decreaseQuantity(Long id) {
+        CartItem item = cartRepository.findById(id).orElseThrow(() -> new RuntimeException("CartItem not found"));
+        if (item.getQuantity() > 1) {
+            item.setQuantity(item.getQuantity() - 1);
+            cartRepository.save(item);
+        }
+        return item.getQuantity();
     }
 }
