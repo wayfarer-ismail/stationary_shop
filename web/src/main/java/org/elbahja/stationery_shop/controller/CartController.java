@@ -42,14 +42,12 @@ public class CartController {
     @PatchMapping("/increase/{id}")
     @ResponseBody
     public int increaseQuantity(@PathVariable Long id) {
-        System.out.println("increase");
         return cartService.increaseQuantity(id);
     }
 
     @PatchMapping("/decrease/{id}")
     @ResponseBody
     public int decreaseQuantity(@PathVariable Long id) {
-        System.out.println("decrease");
         return cartService.decreaseQuantity(id);
     }
 }

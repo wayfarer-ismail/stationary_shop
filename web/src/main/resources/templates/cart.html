@@ -20,7 +20,7 @@
                 <th>Actions</th>
             </tr>
             <tr th:each="item : ${cartItems}">
-                <td th:text="${item.item.getName()}"></td>
+                <td th:text="${#strings.abbreviate(item.item.getName(), 30)}"></td>
                 <td th:text="${item.item.getPrice()}"></td>
 <!--                <td><img th:src="'data:image/png;base64,'+${item.item.getImageBase64()}" alt="Image of the product" class="ui-icon-image"></td>-->
                 <td th:text="${item.getQuantity()}"></td>
