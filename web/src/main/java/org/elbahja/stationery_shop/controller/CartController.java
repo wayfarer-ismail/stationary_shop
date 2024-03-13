@@ -22,6 +22,9 @@ public class CartController {
     public String cart(Model model) {
         List<CartItem> cart = cartService.getCartForCurrentUser();
         model.addAttribute("cartItems", cart);
+
+        double totalPrice = cart.stream().mapToDouble(i -> i.getItem().getPrice() * i.getQuantity()).sum();
+        model.addAttribute("totalPrice", totalPrice);
         return "cart";
     }
 
@@ -34,7 +37,7 @@ public class CartController {
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<?> removeFromCart(@PathVariable Long id) {
-        // get user id from session
+        System.out.println("remove");
         cartService.removeFromCart(id);
         return ResponseEntity.ok().build();
     }

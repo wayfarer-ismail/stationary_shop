@@ -31,6 +31,10 @@
                     <button class="remove-item" th:data-id="${item.id}">Remove</button>
                 </td>
             </tr>
+            <tr>
+                <td colspan="3">Total Price</td>
+                <td th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}"></td>
+            </tr>
         </table>
     </div>
 </div>
