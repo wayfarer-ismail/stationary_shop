@@ -37,7 +37,6 @@ public class CartController {
 
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<?> removeFromCart(@PathVariable Long id) {
-        System.out.println("remove");
         cartService.removeFromCart(id);
         return ResponseEntity.ok().build();
     }

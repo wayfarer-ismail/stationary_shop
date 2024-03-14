@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
@@ -45,7 +46,7 @@ public class DataLoader implements CommandLineRunner {
         try {
             URL url1 = new URL("https://cultpens.com/cdn/shop/products/LB83715_Laban-Taroko-Rollerball-Pen-Marble-Gorge_P1_720x@2x.jpg");
             URL url2 = new URL("https://cdn11.bigcommerce.com/s-r6vjsnlxmh/images/stencil/608x608/products/3978/3665/I1009-bottles__43908.1681938025__49525.1682023874.jpg");
-            URL url3 = new URL("https://www.iguanasell.com/cdn/shop/products/S.T.-Dupont-Liberte-Rollerball-pen-Black-Lacquer-Palladium-trim-462674-04_5000x.jpg");
+            URL url3 = new URL("https://www.theonlinepencompany.com/cache/1210/st-dupont/d-initial/D-262200.jpg");
             URL url4 = new URL("https://i.etsystatic.com/11732535/r/il/69edd5/5459408892/il_1588xN.5459408892_dold.jpg");
             URL url5 = new URL("https://www.italianpens.com/canoABM/_files//PINEIDER/Alchemist%20Kilauea%20Blue/Screenshot%202022-06-08%20091443.jpg");
             URL url6 = new URL("https://m.media-amazon.com/images/I/71ND1hQXJ8L._AC_SL1500_.jpg");
