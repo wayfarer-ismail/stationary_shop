@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Admin Control Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Admin Control Panel</h1>
+
+    <h2>Carts</h2>
+    <table>
+        <!-- Display all carts and provide a delete button for each one -->
+        <tr th:each="cart : ${carts}">
+            <td th:text="${cart.getKey()}"></td>
+            <td>
+                <table>
+                    <tr th:each="item : ${cart.getValue()}">
+                        <td th:text="${item.item.getName()}"></td>
+                        <td th:text="${item.item.getPrice()}"></td>
+                        <td th:text="${item.getQuantity()}"></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <form th:action="@{/admin/delete-cart/{id}(id=${cart.getKey()})}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+<!--    <h2>Orders</h2>-->
+<!--    <table>-->
+<!--        &lt;!&ndash; Display all orders and provide a delete button for each one &ndash;&gt;-->
+<!--        <tr th:each="order : ${orders}">-->
+<!--            <td th:text="${order.id}"></td>-->
+<!--            <td>-->
+<!--                <form th:action="@{/admin/delete-order/{id}(id=${order.id})}" method="post">-->
+<!--                    <button type="submit">Delete</button>-->
+<!--                </form>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+
+    <h2>Accounts</h2>
+    <table>
+        <!-- Display all accounts and provide a delete button for each one -->
+        <tr th:each="account : ${accounts}">
+            <td th:text="${account.id}"></td>
+            <td th:text="${account.username}"></td>
+            <td>
+                <form th:action="@{/admin/delete-account/{id}(id=${account.id})}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
