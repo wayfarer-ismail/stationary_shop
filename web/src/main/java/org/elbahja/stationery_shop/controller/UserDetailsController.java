@@ -19,9 +19,9 @@ public class UserDetailsController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(UserRequest userReq) {
+    public String registerUser(UserRequest userReq) {
         userDetailsServiceImpl.registerUser(userReq);
-        return null;
+        return "redirect:/login";
     }
 
 //    @PostMapping("/login")

@@ -42,7 +42,9 @@ public class SecurityConfig {
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/login").permitAll()
-                                .requestMatchers( HttpMethod.GET,"/catalogue/**").authenticated()
+                                .requestMatchers("/register").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/cart/**").authenticated()
+                                //.requestMatchers(HttpMethod.GET, "admin/").hasRole("ADMIN")
                                 .anyRequest().permitAll()
                 )
 //                .sessionManagement(session -> session
