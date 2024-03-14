@@ -44,7 +44,7 @@ public class SecurityConfig {
                                 .requestMatchers("/login").permitAll()
                                 .requestMatchers("/register").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/cart/**").authenticated()
-                                //.requestMatchers(HttpMethod.GET, "admin/").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/admin/**").hasAuthority("ADMIN")
                                 .anyRequest().permitAll()
                 )
 //                .sessionManagement(session -> session

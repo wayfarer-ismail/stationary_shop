@@ -7,9 +7,11 @@ import org.elbahja.stationery_shop.service.UserDetailsServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.net.ssl.SSLHandshakeException;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -39,6 +41,7 @@ public class DataLoader implements CommandLineRunner {
         UserRequest admin = new UserRequest("admin", "admin");
         if(!userDetailsServiceImpl.userExists (admin.username())) {
             userDetailsServiceImpl.registerUser(admin);
+            userDetailsServiceImpl.updateUserRole(admin.username(), "ADMIN");
         }
     }
 
@@ -48,7 +51,7 @@ public class DataLoader implements CommandLineRunner {
             URL url2 = new URL("https://cdn11.bigcommerce.com/s-r6vjsnlxmh/images/stencil/608x608/products/3978/3665/I1009-bottles__43908.1681938025__49525.1682023874.jpg");
             URL url3 = new URL("https://www.theonlinepencompany.com/cache/1210/st-dupont/d-initial/D-262200.jpg");
             URL url4 = new URL("https://i.etsystatic.com/11732535/r/il/69edd5/5459408892/il_1588xN.5459408892_dold.jpg");
-            URL url5 = new URL("https://www.italianpens.com/canoABM/_files//PINEIDER/Alchemist%20Kilauea%20Blue/Screenshot%202022-06-08%20091443.jpg");
+            URL url5 = new URL("https://placehold.co/400.jpg");
             URL url6 = new URL("https://m.media-amazon.com/images/I/71ND1hQXJ8L._AC_SL1500_.jpg");
             URL url7 = new URL("https://m.media-amazon.com/images/I/61zQl+3eBaL._AC_SL1500_.jpg");
             URL url8 = new URL("https://m.media-amazon.com/images/I/71jq8+X4e3L._AC_SL1500_.jpg");
@@ -121,6 +124,19 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private byte[] readBytesFromUrl(URL url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("HEAD");
+        try {
+            int responseCode = connection.getResponseCode();
+            if (responseCode != HttpURLConnection.HTTP_OK) {
+                // Use default placeholder image
+                url = new URL("https://placehold.co/400.jpg");
+            }
+        } catch (SSLHandshakeException e) {
+            // Use default placeholder image
+            url = new URL("https://placehold.co/400.jpg");
+        }
+
         try (InputStream in = url.openStream();
              ReadableByteChannel rbc = Channels.newChannel(in);
              ByteArrayOutputStream out = new ByteArrayOutputStream()) {

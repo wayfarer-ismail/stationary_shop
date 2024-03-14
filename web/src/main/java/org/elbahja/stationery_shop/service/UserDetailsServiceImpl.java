@@ -54,21 +54,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //            throw new BadRequestException("Empty fields!");
 //        }
 
-        UserDAO userAdapter = new UserDAO(userReq.username(),
+        UserDAO user = new UserDAO(userReq.username(),
                 passwordEncoder.passwordEncoder().encode(userReq.password()));
 
 //        if (userRepository.existsByUsernameIgnoreCase(user.getUsername())) {
 //            throw new ConflictException("User already exists!");
 //        }
 
-//        if (userRepository.count() == 0) { // First user is an administrator
-//            user.setRole("ADMINISTRATOR");
-//            user.setAccountNonLocked(true);
-//        } else {
-//            user.setRole("MERCHANT");
-//        }
-
-        return userRepository.save(userAdapter);
+        return userRepository.save(user);
     }
 
 //    public List<User> listUsers() {
@@ -102,15 +95,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * Updates the role of a user.
      *
      * @param username The username of the user to update.
-     * @param role The new role of the user.
-     * @return The response of the updated user.
+     * @param role     The new role of the user.
      */
     @Transactional
-    public UserDAO updateUserRole(String username, String role) {
-        UserDAO userAdapter = userRepository.findByUsernameIgnoreCase(username)
+    public void updateUserRole(String username, String role) {
+        UserDAO user = userRepository.findByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
-//        if (!role.matches("SUPPORT|MERCHANT")) {
+//        if (!role.matches("SUPPORT|ADMIN")) {
 //            throw new BadRequestException("Invalid role!");
 //        }
 //
@@ -118,8 +110,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //            throw new ConflictException("User already has this role!");
 //        }
 
-        //userAdapter.setRole(role);
-        return userRepository.save(userAdapter);
+        user.setRole(role);
+        userRepository.save(user);
     }
 
     /**

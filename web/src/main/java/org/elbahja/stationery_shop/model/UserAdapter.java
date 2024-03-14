@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 public class UserAdapter implements UserDetails {
@@ -21,6 +22,7 @@ public class UserAdapter implements UserDetails {
     public UserAdapter(UserDAO user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
+        this.role = user.getRole();
     }
 
     @Override
@@ -45,7 +47,7 @@ public class UserAdapter implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(() -> role);
     }
 
     public void setRole(String role) {
